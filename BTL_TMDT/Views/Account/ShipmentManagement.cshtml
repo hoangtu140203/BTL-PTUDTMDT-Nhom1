@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "ShipmentManagement";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/wwwroot/css/shipment-management.css">
+</head>
+
+<div class="container BtZOqO">
+    <div class="epUsgf">
+        <div class="u6SDuY">
+            <a class="w37kB7" href="/user/account/profile">
+                <div class="shopee-avatar">
+                    <div class="shopee-avatar__placeholder">
+                        <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15"
+                             x="0" y="0" class="shopee-svg-icon icon-headshot">
+                            <g>
+                                <circle cx="7.5" cy="4.5" fill="none" r="3.8" stroke-miterlimit="10"></circle>
+                                <path d="m1.5 14.2c0-3.3 2.7-6 6-6s6 2.7 6 6" fill="none" stroke-linecap="round"
+                                      stroke-miterlimit="10"></path>
+                            </g>
+                        </svg>
+                    </div><img class="shopee-avatar__img"
+                               src="https://inkythuatso.com/uploads/thumbnails/800/2021/12/logo-dai-hoc-cong-nghiep-ha-noi-inkythuatso-01-21-16-44-16.jpg">
+                </div>
+            </a>
+            <div class="vDMlrj">
+                <div class="HtUK6o">@ViewBag.username</div>
+                <div><a class="Kytn1s" href="/user/account/profile">Khách hàng</a></div>
+            </div>
+        </div>
+        <div class="WDmP96">
+            <div class="stardust-dropdown stardust-dropdown--open">
+                <div class="stardust-dropdown__item-header">
+                    <a class="jHbobZ" href="/user/account/profile">
+                        <div class="U7dHrp">
+                            <img src="https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4">
+                        </div>
+                        <div class="mY8KSl"><span class="fnmbfn">Tài khoản của tôi</span></div>
+                    </a>
+                </div>
+                <div class="stardust-dropdown__item-body stardust-dropdown__item-body--open">
+                    <div class="hGOWVP">
+                        <a class="HVZpoT" href="/user/account/profile">
+                            <span class="PcLlJr">
+                                Hồ
+                                sơ
+                            </span>
+                        </a><a class="HVZpoT VfX643" href="@Url.Action("ShipmentManagement", "Account")">
+                            <span class="PcLlJr">Địa chỉ</span>
+                        </a>
+                        <a href="@Url.Action("Logout", "Account")"><span class="PcLlJr">Đăng xuất</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="stardust-dropdown">
+                <div class="stardust-dropdown__item-header">
+                    <a class="jHbobZ" href="/user/purchase">
+                        <div class="U7dHrp">
+                            <img src="https://down-vn.img.susercontent.com/file/f0049e9df4e536bc3e7f140d071e9078">
+                        </div>
+                        <a href="@Url.Action("OrderHistory", "Cart")">
+                            <div class="mY8KSl"><span class="fnmbfn">Đơn Mua</span></div>
+                        </a>
+                    </a>
+                </div>
+                <div class="stardust-dropdown__item-body">
+                    <div class="hGOWVP"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fkIi86">
+        <div class="CAysXD" role="main">
+            <div class="Vfy7i0">
+                <div class="jrDLfj">
+                    <div class="TPi1ZQ">
+                        <div class="PTegQ8">Địa chỉ của tôi</div>
+                        <div class="Zk21QZ"></div>
+                    </div>
+                    <div>
+                        <div class="v83kOK">
+                            <div style="display: flex;">
+                                <button class="shopee-button-solid shopee-button-solid--primary Vpc5fC">
+                                    <div class="GipOsI">
+                                        <div class="kzWd1d">
+                                            <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10"
+                                                 x="0" y="0" class="shopee-svg-icon icon-plus-sign">
+                                                <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5">
+                                                </polygon>
+                                            </svg>
+                                        </div>
+                                        <div>Thêm địa chỉ mới</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="_2f9MDn">
+                    <div class="stardust-spinner--hidden stardust-spinner">
+                        <div class="stardust-spinner__background">
+                            <div class="stardust-spinner__main" role="img">
+                                <svg width="34" height="12"
+                                     viewBox="-1 0 33 12">
+                                    <circle class="stardust-spinner__spinner" cx="4" cy="6" r="4" fill="#EE4D2D">
+                                    </circle>
+                                    <circle class="stardust-spinner__spinner" cx="16" cy="6" r="4" fill="#EE4D2D">
+                                    </circle>
+                                    <circle class="stardust-spinner__spinner" cx="28" cy="6" r="4" fill="#EE4D2D">
+                                    </circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="DTh_Ib">
+                        <div class="wMgGpz">Địa chỉ</div>
+                        @foreach (var shipment in ViewBag.Shipments as IEnumerable<BTL_TMDT.Models.Shipment>)
+                        {
+                            @Html.Partial("_Shipment", shipment)
+                        }
+
+                        @*<div class="phUg9e qgjZnV">
+                                <div class="mrHKcx">
+                                    <div role="heading" class="mRiaYb oNu1GY">
+                                        <div id="address-card_d102571d-f2f9-48dc-b81e-9c10f56524fb_header"
+                                             class="CCAodK aE_RFg">
+                                            <span class="AMx6oo xkPHQf">
+                                                <div class="kV1nkS">Trương Công Mạnh</div>
+                                            </span>
+                                            <div class="j9nfet"></div>
+                                            <div role="row" class="qmU0hi FQB1xE DPJLqq">(+84) 969976386</div>
+                                        </div>
+                                        <div class="gcimiv"><button class="sMlAxh">Cập nhật</button></div>
+                                    </div>
+                                    <div id="address-card_d102571d-f2f9-48dc-b81e-9c10f56524fb_content" role="heading"
+                                         class="mRiaYb oNu1GY">
+                                        <div class="CCAodK aE_RFg">
+                                            <div class="S8RZkg">
+                                                <div role="row" class="DPJLqq">1 Ngách 54 Ngõ 134 Đường Cầu Diễn</div>
+                                                <div role="row" class="DPJLqq">
+                                                    Phường Minh Khai, Quận Bắc Từ Liêm, Hà Nội
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="XjmW7h gcimiv">
+                                            <button class="N6pneA fjdwZV rc6El_" disabled="">
+                                                Thiết
+                                                lập mặc định
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="address-card_d102571d-f2f9-48dc-b81e-9c10f56524fb_badge" role="row"
+                                         class="jFJhIS DPJLqq">
+                                        <span role="mark" class="SBGPfX Ox2pBw bOxoVV">Mặc định</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="phUg9e qgjZnV">
+                                <div class="mrHKcx">
+                                    <div role="heading" class="mRiaYb oNu1GY">
+                                        <div id="address-card_c7930ddf-0ff2-4e21-91c2-126d8e838dfe_header"
+                                             class="CCAodK aE_RFg">
+                                            <span class="AMx6oo xkPHQf">
+                                                <div class="kV1nkS">Trương Công Mạnh</div>
+                                            </span>
+                                            <div class="j9nfet"></div>
+                                            <div role="row" class="qmU0hi FQB1xE DPJLqq">(+84) 969976386</div>
+                                        </div>
+                                        <div class="gcimiv">
+                                            <button class="sMlAxh">Cập nhật</button><button class="sMlAxh">
+                                                Xóa
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="address-card_c7930ddf-0ff2-4e21-91c2-126d8e838dfe_content" role="heading"
+                                         class="mRiaYb oNu1GY">
+                                        <div class="CCAodK aE_RFg">
+                                            <div class="S8RZkg">
+                                                <div role="row" class="DPJLqq">Nhà Thờ Kẻ Chương, Chương Lương, Thôn 2</div>
+                                                <div role="row" class="DPJLqq">Xã Bắc Lý, Huyện Lý Nhân, Hà Nam</div>
+                                            </div>
+                                        </div>
+                                        <div class="XjmW7h gcimiv">
+                                            <button class="N6pneA fjdwZV rc6El_">
+                                                Thiết lập mặc
+                                                định
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="address-card_c7930ddf-0ff2-4e21-91c2-126d8e838dfe_badge" role="row"
+                                         class="jFJhIS DPJLqq"></div>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

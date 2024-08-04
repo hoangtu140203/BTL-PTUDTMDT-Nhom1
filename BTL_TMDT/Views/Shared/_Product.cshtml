@@ -1,0 +1,62 @@
+﻿
+@model BTL_TMDT.Models.Product
+
+@{ var imageList = Model.Product_Images.ToList(); }
+
+
+<div class="product">
+    <div class="product-img">
+        <img src="~/wwwroot/img/@imageList[0].image_url" alt="">
+        <div class="product-label">
+            @if (Model.stock > 0)
+            {
+                <span class="sale">@Model.stock%</span>
+            }
+            @if ((bool)(Model.is_new))
+            {
+                <span class="new">NEW</span>
+            }
+        </div>
+    </div>
+    <div class="product-body">
+        <p class="product-category">@Model.Category.category_name</p>
+        <h3 class="product-name"><a href="@Url.Action("Details", "Product", new { id = @Model.product_id })">@Model.product_name</a></h3>
+        <h4 class="product-price">@String.Format("{0:C}", Model.discount_price.Value) <del class="product-old-price">@String.Format("{0:C}", Model.price)</del></h4>
+        <div class="product-rating">
+            @for (int i = 0; i < 5; i++)
+            {
+                <i class="fa fa-star"></i>
+                @*if (i < Model.Rating)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+                    else
+                    {
+                        <i class="fa fa-star-o"></i>
+                    }*@
+            }
+        </div>
+        <div class="product-btns">
+            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
+            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">So sánh</span></button>
+            @*<a href="@Url.Action("Details", "Product", new { id = @Model.product_id })">
+                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem</span></button>
+                </a>*@
+            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem</span></button>
+
+        </div>
+    </div>
+
+    <div class="add-to-cart">
+        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+        {
+            <input type="hidden" name="productId" value="@Model.product_id" />
+            <input type="hidden" name="quantity" value="1" min="1" max="@Model.stock" />
+
+            <button class="add-to-cart-btn">
+                <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+            </button>
+        }
+    </div>
+</div>
+

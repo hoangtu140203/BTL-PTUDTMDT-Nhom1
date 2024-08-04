@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@model IEnumerable<BTL_TMDT.Models.Category>
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Danh mục sản phẩm</h2>
+
+<ul>
+    @foreach (var category in Model)
+    {
+        <li><a href="@Url.Action("ProductsByCategory", "Product", new { categoryId = category.category_id })">@category.category_name</a></li>
+    }
+</ul>
+
+
+

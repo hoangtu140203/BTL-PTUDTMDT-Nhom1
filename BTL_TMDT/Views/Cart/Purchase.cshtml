@@ -1,0 +1,214 @@
+﻿@{
+    ViewBag.Title = "Purchase";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@model BTL_TMDT.Models.User
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Đặt hàng</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="#">Trang chủ</a></li>
+                    <li class="active">Đặt hàng</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+@using (Html.BeginForm("Purchase", "Cart", FormMethod.Post, new { id = "purchase-form" }))
+{
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-7">
+                    <!-- Billing Details -->
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title">Địa chỉ thanh toán</h3>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="billing_first_name" name="recipient_first_name" placeholder="Tên" value="@Model.first_name">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="billing_last_name" name="recipient_last_name" placeholder="Họ và tên đệm" value="@Model.last_name">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="tel" id="recipient_phone" name="recipient_phone" placeholder="Điện thoại" value="@Model.phone">
+                        </div>
+                        @{ var shipments = Model.Shipments.ToList(); }
+                        <div class="form-group">
+                            <input class="input" type="text" id="billing_address" name="address" placeholder="Địa chỉ" value="@shipments[0].shipment_address">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="billing_city" name="city" placeholder="Thành phố" value="@shipments[0].shipment_city">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="billing_country" name="country" placeholder="Quốc gia" value="@shipments[0].shipment_country">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" id="billing_zipCode" name="zipCode" placeholder="ZIP Code" value="@shipments[0].shipment_zip_code">
+                        </div>
+                    </div>
+                    <!-- /Billing Details -->
+                    <!-- Shipping Details -->
+                    <div class="shipping-details">
+                        <div class="section-title">
+                            <h3 class="title">Địa chỉ giao hàng</h3>
+                        </div>
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="shipping-address-checkbox">
+                            <label for="shipping-address-checkbox">
+                                <span></span>
+                                Gửi đến một địa chỉ khác?
+                            </label>
+                            <div class="caption" id="shipping-form">
+                                <div class="form-group">
+                                    <input class="input" type="text" id="shipping_first_name" name="recipient_first_name" placeholder="Tên">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" id="shipping_last_name" name="recipient_last_name" placeholder="Họ và tên đệm">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="tel" id="shipping_phone" name="recipient_phone" placeholder="Điện thoại">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" id="shipping_address" name="address" placeholder="Địa chỉ">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" id="shipping_city" name="city" placeholder="Thành phố">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" id="shipping_country" name="country" placeholder="Quốc gia">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" id="shipping_zipCode" name="zipCode" placeholder="ZIP Code">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Shipping Details -->
+                    <!-- Order notes -->
+                    <div class="order-notes">
+                        <textarea class="input" name="order_note" placeholder="Order Notes"></textarea>
+                    </div>
+                    <!-- /Order notes -->
+                </div>
+
+                <!-- Order Details -->
+                <div class="col-md-5 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Đơn hàng của bạn</h3>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>SẢN PHẨM</strong></div>
+                            <div><strong>TỔNG</strong></div>
+                        </div>
+                        <div class="order-products">
+                            @{ var carts = Model.Carts.ToList(); }
+                            @foreach (var product in carts)
+                            {
+                                <div class="order-col">
+                                    <div>
+                                        @product.quantity<span>x </span>@product.Product.product_name
+                                    </div>
+                                    <div>@String.Format("{0:C}", product.quantity * product.Product.discount_price)</div>
+                                </div>
+                            }
+                        </div>
+                        <div class="order-col">
+                            <div>Phí vận chuyển</div>
+                            <div><strong>MIỄN PHÍ</strong></div>
+                        </div>
+                        <div class="order-col">
+                            <div><strong>TỔNG CỘNG</strong></div>
+                            <div><strong class="order-total">@String.Format("{0:C}", carts.Sum(x => x.Product.discount_price * x.quantity))</strong></div>
+                        </div>
+                    </div>
+                    <div class="payment-method">
+                        <div class="input-radio">
+                            <input type="radio" name="payment" id="payment-1">
+                            <label for="payment-1">
+                                <span></span>
+                                Chuyển khoản trực tiếp
+                            </label>
+                            <div class="caption">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="input-radio">
+                            <input type="radio" name="payment" id="payment-2">
+                            <label for="payment-2">
+                                <span></span>
+                                Thanh toán khi nhận hàng
+                            </label>
+                            <div class="caption">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="input-radio">
+                            <input type="radio" name="payment" id="payment-3">
+                            <label for="payment-3">
+                                <span></span>
+                                Ví PayPal
+                            </label>
+                            <div class="caption">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Đặt hàng" class="primary-btn order-submit" onclick="submitForm(event)" />
+                </div>
+                <!-- /Order Details -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+}
+<!-- /SECTION -->
+
+<script>
+    function submitForm(event) {
+        event.preventDefault();
+        var checkbox = document.getElementById('shipping-address-checkbox');
+        var form = document.getElementById('purchase-form');
+
+        // Disable all inputs in the billing details or shipping details based on checkbox state
+        var billingDetails = document.querySelectorAll('.billing-details .input');
+        var shippingDetails = document.querySelectorAll('.shipping-details .input');
+
+        if (checkbox.checked) {
+            billingDetails.forEach(input => input.disabled = true);
+            shippingDetails.forEach(input => input.disabled = false);
+        } else {
+            billingDetails.forEach(input => input.disabled = false);
+            shippingDetails.forEach(input => input.disabled = true);
+        }
+
+        form.submit();
+    }
+</script>

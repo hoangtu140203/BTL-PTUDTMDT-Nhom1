@@ -1,0 +1,17 @@
+﻿
+@model BTL_TMDT.Models.Product
+
+@{ var imageList = Model.Product_Images.ToList(); }
+
+
+<div class="product-widget">
+    <div class="product-img">
+        <img src="~/wwwroot/img/@imageList[0].image_url" alt="">
+    </div>
+    <div class="product-body">
+        <p class="product-category">@Model.Category.category_name</p>
+        <h3 class="product-name"><a href="@Url.Action("Details", "Product", new { id = @Model.product_id })">@Model.product_name</a></h3>
+        <h4 class="product-price">@(Model.discount_price) <del class="product-old-price">$@Model.price</del></h4>
+    </div>
+</div>
+

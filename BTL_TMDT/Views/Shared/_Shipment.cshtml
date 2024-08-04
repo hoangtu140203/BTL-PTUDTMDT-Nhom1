@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BTL_TMDT.Models.Shipment>
+
+@foreach (var shipment in model)
+{
+    @Html.Partial("_Shipment", shipment)
+}
+
+<div class="phUg9e qgjZnV">
+    <div class="mrHKcx">
+        <div role="heading" class="mRiaYb oNu1GY">
+            <div id="address-card_d102571d-f2f9-48dc-b81e-9c10f56524fb_header"
+                 class="CCAodK aE_RFg">
+                <span class="AMx6oo xkPHQf">
+                    <div class="kV1nkS">@Model.recipient_first_name @Model.recipient_last_name</div>
+                </span>
+                <div class="j9nfet"></div>
+                <div role="row" class="qmU0hi FQB1xE DPJLqq">(+84) @Model.recipient_phone</div>
+            </div>
+            <div class="gcimiv"><button class="sMlAxh">Cập nhật</button></div>
+        </div>
+        <div id="address-card_d102571d-f2f9-48dc-b81e-9c10f56524fb_content" role="heading"
+             class="mRiaYb oNu1GY">
+            <div class="CCAodK aE_RFg">
+                <div class="S8RZkg">
+                    <div role="row" class="DPJLqq">@Model.shipment_address</div>
+                    <div role="row" class="DPJLqq">
+                        @Model.shipment_city (@Model.shipment_zip_code), @Model.shipment_country
+                    </div>
+                </div>
+            </div>
+            <div class="XjmW7h gcimiv">
+                <button class="N6pneA fjdwZV rc6El_" disabled="">
+                    Thiết
+                    lập mặc định
+                </button>
+            </div>
+        </div>
+        <div id="address-card_d102571d-f2f9-48dc-b81e-9c10f56524fb_badge" role="row"
+             class="jFJhIS DPJLqq">
+            <span role="mark" class="SBGPfX Ox2pBw bOxoVV">Mặc định</span>
+        </div>
+    </div>
+</div>

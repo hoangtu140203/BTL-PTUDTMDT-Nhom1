@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "OrderHistory";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@model IEnumerable<BTL_TMDT.Models.Order>
+@{
+    var shipmentAddresses = ViewBag.ShipmentAddresses as Dictionary<int, string>;
+    var productCounts = ViewBag.ProductCounts as Dictionary<int, int>;
+}
+
+<h2>Đơn hàng đã đặt</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Shipment Address</th>
+                <th>Number of Products</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr onclick="location.href='@Url.Action("OrderDetails", "Cart", new { id = order.order_id })'">
+                    <td>@order.order_id</td>
+                    <td>@order.order_date.ToString()</td>
+                    <td>@String.Format("{0:C}", order.total_amount)</td>
+                    <td>@order.status</td>
+                    <td>@shipmentAddresses[order.order_id]</td>
+                    <td>@productCounts[order.order_id]</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Bạn chưa đặt bất kỳ đơn hàng nào.</p>
+}

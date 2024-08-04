@@ -1,0 +1,312 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>BTL - Nhóm 1</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/bootstrap.min.css" />
+
+
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="~/wwwroot/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/style.css" />
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <li><a href="#"><i class="fa fa-phone"></i> (+84) 096.997.63.86</a></li>
+                    <li><a href="#"><i class="fa fa-envelope-o"></i> tcongmanh2003@gmail.com</a></li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-map-marker"></i> Số 298 Đ. Cầu Diễn, Minh Khai, Bắc Từ Liêm, Hà
+                            Nội
+                        </a>
+                    </li>
+                </ul>
+                <ul class="header-links pull-right">
+                    <li><a href="#"><i class="fa fa-dollar"></i> VND</a></li>
+                    <li>
+                        <a href="@Url.Action("ShipmentManagement", "Account")"><i class="fa fa-user-o"></i>Tài khoản</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+        <!-- MAIN HEADER -->
+        <div id="header">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="#" class="logo">
+                                <img src="~/wwwroot/img/logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+                    <!-- SEARCH BAR -->
+                    <div class="col-md-6">
+                        <div class="header-search">
+                            <form action="@Url.Action("Search", "Product")" method="get">
+                                <select class="input-select">
+                                    <option value="0">Danh mục</option>
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        <option value="@category.category_id">@category.category_name</option>
+                                    }
+                                </select>
+                                <input class="input" type="text" name="query" value="@ViewBag.Query" placeholder="Tìm kiếm ở đây" />
+                                <button class="search-btn">Tìm kiếm</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /SEARCH BAR -->
+                    <!-- ACCOUNT -->
+                    <div class="col-md-3 clearfix">
+                        <div class="header-ctn">
+                            <!-- Wishlist -->
+                            <div>
+                                <a href="#">
+                                    <i class="fa fa-heart-o"></i>
+                                    <span>Yêu thích</span>
+                                    <div class="qty">2</div>
+                                </a>
+                            </div>
+                            <!-- /Wishlist -->
+                            <!-- Cart -->
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span>Giỏ hàng</span>
+                                    <div class="qty">3</div>
+                                </a>
+                                <div class="cart-dropdown">
+                                    <div class="cart-list">
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img src="~/wwwroot/img/product01.png" alt="">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                                <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                            </div>
+                                            <button class="delete"><i class="fa fa-close"></i></button>
+                                        </div>
+
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img src="~/wwwroot/img/product02.png" alt="">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                                <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                                            </div>
+                                            <button class="delete"><i class="fa fa-close"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="cart-summary">
+                                        <small>3 Item(s) selected</small>
+                                        <h5>SUBTOTAL: $2940.00</h5>
+                                    </div>
+                                    <div class="cart-btns">
+                                        <a href="#">Xem giỏ hàng</a>
+                                        <a href="#">Thanh toántoán <i class="fa fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Cart -->
+                            <!-- Menu Toogle -->
+                            <div class="menu-toggle">
+                                <a href="#">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Menu</span>
+                                </a>
+                            </div>
+                            <!-- /Menu Toogle -->
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+    <!-- /HEADER -->
+    <!-- NAVIGATION -->
+    <nav id="navigation">
+        <!-- container -->
+        <div class="container">
+            <!-- responsive-nav -->
+            <div id="responsive-nav">
+                <!-- NAV -->
+                <ul class="main-nav nav navbar-nav" style="display: flex; flex-direction: row;">
+                    <li class="active"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                    <li><a href="#">Ưu đãi lớn</a></li>
+                    <li><a href="@Url.Action("Categories", "Product")">Danh mục sản phẩm</a></li>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <li><a href="@Url.Action("ProductsByCategory", "Product", new { categoryId = category.category_id })">@category.category_name</a></li>
+                    }
+                </ul>
+                <!-- /NAV -->
+            </div>
+            <!-- /responsive-nav -->
+        </div>
+        <!-- /container -->
+    </nav>
+    <!-- /NAVIGATION -->
+    <!-- SECTION -->
+    @RenderBody()
+    <!-- SECTION -->
+    <!-- FOOTER -->
+    <footer id="footer">
+        <!-- top footer -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Về chúng tôi</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut.
+                            </p>
+                            <ul class="footer-links">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-map-marker"></i>Số 298 Đ. Cầu Diễn, Minh Khai, Bắc Từ
+                                        Liêm, Hà Nội
+                                    </a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-phone"></i>(+84) 096.997.63.86</a></li>
+                                <li><a href="#"><i class="fa fa-envelope-o"></i>tcongmanh2003@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Danh mục</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">Ưu đãi lớn</a></li>
+                                <li><a href="#">Laptops</a></li>
+                                <li><a href="#">Điện thoại</a></li>
+                                <li><a href="#">Máy ảnh</a></li>
+                                <li><a href="#">Phụ kiện</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Thông tin</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">Về chúng toi</a></li>
+                                <li><a href="#">Liên hệ</a></li>
+                                <li><a href="#">Chính sách bảo mật</a></li>
+                                <li><a href="#">Đổi trả hàng</a></li>
+                                <li><a href="#">Điều khoản và chính sách</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Dịch vụ</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">Tài khoản của tôi</a></li>
+                                <li><a href="#">Xem giỏ hàng</a></li>
+                                <li><a href="#">Danh sách yêu thích</a></li>
+                                <li><a href="#">Theo dõi đơn hàng</a></li>
+                                <li><a href="#">Hỗ trợ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /top footer -->
+        <!-- bottom footer -->
+        <div id="bottom-footer" class="section">
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <ul class="footer-payments">
+                            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                        </ul>
+                        <span class="copyright">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Bản quyền &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> Mọi quyền được bảo hộ | <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://fb.com/manhtruong03.it" target="_blank">
+                                Nhóm
+                                1 - Phát triển ứng dụng thương mại điện tử
+                            </a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </span>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /bottom footer -->
+    </footer>
+    <!-- /FOOTER -->
+    <!-- jQuery Plugins -->
+    <script src="~/wwwroot/js/jquery.min.js"></script>
+    <script src="~/wwwroot/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/js/slick.min.js"></script>
+    <script src="~/wwwroot/js/nouislider.min.js"></script>
+    <script src="~/wwwroot/js/jquery.zoom.min.js"></script>
+    <script src="~/wwwroot/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>
